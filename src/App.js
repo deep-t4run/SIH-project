@@ -9,6 +9,7 @@ import LoginPage from "./Components/LoginPage";
 import HealthForm from "./Components/Form.js";
 import SuccessPage from "./Components/SuccessPage";
 import Navbar from "./Components/Navbar";
+import Footer from "./Components/Footer";
 
 function App() {
   const [predictionResult, setPredictioResult] = useState(null);
@@ -40,6 +41,7 @@ function App() {
           element={<SuccessPage predictionResult={predictionResult} />}
         ></Route>
       </Routes>
+      <Footer></Footer>
     </>
   );
 }

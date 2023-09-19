@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import ParticleAnimation from "./ParticleAnimation";
 
@@ -31,17 +31,17 @@ function LoginPage() {
     console.log("Admin login:", formData);
   };
 
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, []);
+  // useEffect(() => {
+  //   document.body.style.overflow = "hidden";
+  //   return () => {
+  //     document.body.style.overflow = "unset";
+  //   };
+  // }, []);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-700">
       <ParticleAnimation />
-      <div className="bg-gray-800 p-8 rounded shadow-md w-96 z-50">
+      <div className="bg-gray-800 bg-opacity-75 p-8 rounded shadow-md w-96 z-50">
         <h2 className="text-4xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-700 pb-1 flex justify-center">
           LogIn to Menta
         </h2>
