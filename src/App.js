@@ -4,6 +4,7 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
+import SignUpPage from "./Components/SignUp";
 import LoginPage from "./Components/LoginPage";
 import HealthForm from "./Components/Form.js";
 import SuccessPage from "./Components/SuccessPage";
@@ -31,6 +32,7 @@ function App() {
     <>
       <Navbar></Navbar>
       <Routes>
+        <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/" element={<LoginPage />} />
         <Route path="/health-form" element={<HealthForm />} />
         <Route

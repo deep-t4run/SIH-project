@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ParticleAnimation from "./ParticleAnimation";
 
-function LoginPage() {
+function SignUpPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const navigate = useNavigate();
@@ -19,16 +20,11 @@ function LoginPage() {
     });
   };
 
-  const handleClientLogin = () => {
-    // Add your login logic here
-    console.log("Client login:", formData);
-    // Redirect to health form page
-    navigate("/health-form");
-  };
-
-  const handleAdminLogin = () => {
-    // Add your admin login logic here
-    console.log("Admin login:", formData);
+  const handleSignUp = () => {
+    // Add your sign-up logic here
+    console.log("Sign up:", formData);
+    // Redirect to login page or any other page after successful sign-up
+    navigate("/");
   };
 
   useEffect(() => {
@@ -43,8 +39,22 @@ function LoginPage() {
       <ParticleAnimation />
       <div className="bg-gray-800 p-8 rounded shadow-md w-96 z-50">
         <h2 className="text-4xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-700 pb-1 flex justify-center">
-          LogIn to Menta
+          Welcome to Menta
         </h2>
+        <div className="mb-4">
+          <label htmlFor="name" className="block text-slate-100 font-medium">
+            Full Name:
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={formData.name}
+            onChange={handleInputChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+            required
+          />
+        </div>
         <div className="mb-4">
           <label htmlFor="email" className="block text-slate-100 font-medium">
             Email:
@@ -76,35 +86,38 @@ function LoginPage() {
             required
           />
         </div>
-        <div className="mb-4 flex justify-between">
+        <div className="mb-4">
+          <label
+            htmlFor="confirmPassword"
+            className="block text-slate-100 font-medium"
+          >
+            Confirm Password:
+          </label>
+          <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleInputChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          {/* Add more input fields for additional sign-up information */}
+        </div>
+        <div className="mb-4 flex justify-center">
           <button
             type="button"
-            onClick={handleClientLogin}
+            onClick={handleSignUp}
             className="bg-gradient-to-r from-blue-500 to-purple-700 text-white py-2 px-4 rounded hover:bg-gradient-to-l from-blue-500 to-purple-700 focus:outline-none focus:bg-blue-600 mr-2"
           >
-            Login for Clients
-          </button>
-          <button
-            type="button"
-            onClick={handleAdminLogin}
-            className="bg-gradient-to-l from-blue-500 to-purple-700 text-white py-2 px-4 rounded hover:bg-gradient-to-r from-blue-500 to-purple-700 focus:outline-none focus:bg-red-600"
-          >
-            Login for Admins
-          </button>
-        </div>
-        {/* Add the "Don't have an account? Sign Up" line with a Link */}
-        <div className="text-center text-slate-100">
-          Don't have an account?{" "}
-          <Link
-            to="/sign-up"
-            className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-700 "
-          >
             Sign Up
-          </Link>
+          </button>
         </div>
       </div>
     </div>
   );
 }
 
-export default LoginPage;
+export default SignUpPage;
