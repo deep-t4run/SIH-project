@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ParticleAnimation from "./ParticleAnimation";
+import axios from "axios";
 
 function HealthForm() {
   const [formData, setFormData] = useState({
@@ -39,18 +40,29 @@ function HealthForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Form submitted:", formData);
-    navigate("/success");
+    navigate("/emotion-analysis");
+    // try {
+    //   const response = await axios.post(
+    //     "http://localhost:3001/api/v1/response/predict",
+    //     formData
+    //   );
+    //   if (response.data.success) {
+    //     navigate("/emotion-analysis", {
+    //       state: { prediction: response.data.data.predicted },
+    //     });
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
     <div className="relative min-h-screen bg-gray-700">
       {/* Particle Container */}
-      <div className="absolute top-0 left-0 w-full h-full z-0">
-        <ParticleAnimation />
-      </div>
-      <div className="container mx-auto px-4 pt-8 pb-8 relative z-10">
+      <ParticleAnimation />
+      <div className="container mx-auto px-4 pt-8 pb-8 z-10">
         {/* Form container */}
-        <div className="realtive z-10 p-8 rounded shadow-md w-96 bg-gray-800 z-50 m-auto bg-opacity-75">
+        <div className="p-8 rounded shadow-md w-96 bg-gray-800 m-auto bg-opacity-75 relative">
           <h2 className="text-2xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-700 flex justify-center item-center">
             Health Information Form
           </h2>

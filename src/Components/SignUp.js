@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { json, useNavigate } from "react-router-dom";
 import ParticleAnimation from "./ParticleAnimation";
 
 function SignUpPage() {
@@ -22,6 +22,35 @@ function SignUpPage() {
 
   const handleSignUp = () => {
     // Add your sign-up logic here
+    // Create a JSON object with the user data
+
+    // const userData = {
+    //   name: formData.name,
+    //   email: formData.email,
+    //   password: formData.password,
+    // };
+
+    // // Send a POST request to your backend API
+    // fetch("/api/signup", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: json.stringify(userData),
+    // })
+    //   .then((response) => {
+    //     if (response.ok) {
+    //       // Resgistration was successful, redirect to the login page
+    //       navigate("/");
+    //     } else {
+    //       alert("Error signing up");
+    //       console.log("Registration failed");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error: ", error);
+    //   });
+
     console.log("Sign up:", formData);
     // Redirect to login page or any other page after successful sign-up
     navigate("/");

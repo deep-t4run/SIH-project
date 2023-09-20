@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import ParticleAnimation from "./ParticleAnimation";
 
@@ -8,6 +8,8 @@ function LoginPage() {
     email: "",
     password: "",
   });
+
+  const [loginError, setLoginError] = useState(null);
 
   const navigate = useNavigate();
 
@@ -21,22 +23,45 @@ function LoginPage() {
 
   const handleClientLogin = () => {
     // Add your login logic here
+    // Create an object with the user's email and password
+    // const userData = {
+    //   email: formData.email,
+    //   password: formData.password,
+    // };
+
+    // Send a POST request to your backend authentication endpoint
+    // fetch("/api/client-login", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(userData),
+    // })
+    //   .then((response) => {
+    //     if (response.ok) {
+    //       // Login was successful, redirect to the health form page
+    //       navigate("/home");
+    //     } else {
+    //       // Login failed, display an error message
+    //       setLoginError("Invalid credentials. Please sign up.");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error: ", error);
+    //     setLoginError("An error occured. Please try again later.");
+    //   });
+
     console.log("Client login:", formData);
     // Redirect to health form page
-    navigate("/health-form");
+    navigate("/home");
   };
 
   const handleAdminLogin = () => {
     // Add your admin login logic here
     console.log("Admin login:", formData);
+    // Redirect to health form page
+    navigate("/home");
   };
-
-  // useEffect(() => {
-  //   document.body.style.overflow = "hidden";
-  //   return () => {
-  //     document.body.style.overflow = "unset";
-  //   };
-  // }, []);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-700">

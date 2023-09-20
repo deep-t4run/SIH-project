@@ -10,6 +10,8 @@ import HealthForm from "./Components/Form.js";
 import SuccessPage from "./Components/SuccessPage";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
+import HomePage from "./Components/HomePage";
+import EmotionAnalysis from "./Components/EmotionAnalysis";
 
 function App() {
   const [predictionResult, setPredictioResult] = useState(null);
@@ -33,9 +35,11 @@ function App() {
     <>
       <Navbar></Navbar>
       <Routes>
-        <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/" element={<LoginPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/health-form" element={<HealthForm />} />
+        <Route path="/emotion-analysis" element={<EmotionAnalysis />} />
         <Route
           path="/success"
           element={<SuccessPage predictionResult={predictionResult} />}
