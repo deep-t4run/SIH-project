@@ -1,8 +1,11 @@
 import React from "react";
 import ParticleAnimation from "./ParticleAnimation";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-function SuccessPage({ predictionResult }) {
+function SuccessPage() {
+  const location = useLocation();
+  const predictionResult = location.state && location.state.prediction;
+
   const navigate = useNavigate();
 
   const handleGoToLogIn = () => {

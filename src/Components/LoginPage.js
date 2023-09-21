@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import ParticleAnimation from "./ParticleAnimation";
+import axios from "axios";
 
 function LoginPage() {
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
   });
-
-  const [loginError, setLoginError] = useState(null);
 
   const navigate = useNavigate();
 
@@ -21,39 +19,28 @@ function LoginPage() {
     });
   };
 
-  const handleClientLogin = () => {
-    // Add your login logic here
-    // Create an object with the user's email and password
-    // const userData = {
-    //   email: formData.email,
-    //   password: formData.password,
-    // };
+  const handleClientLogin = async () => {
+    try {
+      // Add your login logic here
+      // console.log("Client login:", formData);
+      const response = await axios.post(
+        "http://localhost:3001/api/v1/user/signin",
+        formData
+      );
+      // console.log(response.data);
+      if (response.data.success) {
+        // Redirect to home page
+        navigate("/home", { state: { userid: response.data.data.id } });
+      }
+    } catch (error) {
+      console.log(error);
+      const errorMessage = error.response.data.error.explanation;
+      alert(errorMessage);
+    }
 
-    // Send a POST request to your backend authentication endpoint
-    // fetch("/api/client-login", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(userData),
-    // })
-    //   .then((response) => {
-    //     if (response.ok) {
-    //       // Login was successful, redirect to the health form page
-    //       navigate("/home");
-    //     } else {
-    //       // Login failed, display an error message
-    //       setLoginError("Invalid credentials. Please sign up.");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log("Error: ", error);
-    //     setLoginError("An error occured. Please try again later.");
-    //   });
-
-    console.log("Client login:", formData);
-    // Redirect to health form page
-    navigate("/home");
+    // console.log("Client login:", formData);
+    // // Redirect to home page
+    // navigate("/home");
   };
 
   const handleAdminLogin = () => {

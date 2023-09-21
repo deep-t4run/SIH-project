@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import caraosel1 from "../Images/caraousel-1.jpg";
@@ -7,11 +7,13 @@ import caraosel2 from "../Images/caraousel-2.jpg";
 import caraosel3 from "../Images/caraousel-3.jpg";
 
 function HomePage() {
+  const location = useLocation();
+  const userid = location.state && location.state.userid;
   const navigate = useNavigate();
 
   const handleGetDiagnosed = () => {
-    console.log("Button Clicked");
-    navigate("/health-form");
+    // console.log("Button Clicked");
+    navigate("/health-form", { state: { userid: userid } });
   };
 
   return (

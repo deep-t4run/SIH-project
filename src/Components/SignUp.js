@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ParticleAnimation from "./ParticleAnimation";
+import axios from "axios";
 
 function SignUpPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    confirmPassword: "",
   });
 
   const navigate = useNavigate();
@@ -20,40 +20,30 @@ function SignUpPage() {
     });
   };
 
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     // Add your sign-up logic here
     // Create a JSON object with the user data
+    try {
+      // console.log("Sign up:", formData);
 
-    // const userData = {
-    //   name: formData.name,
-    //   email: formData.email,
-    //   password: formData.password,
-    // };
+      const response = await axios.post(
+        "http://localhost:3001/api/v1/user/signup",
+        formData
+      );
+      // console.log(response.data);
+      if (response.data.success) {
+        navigate("/");
+      }
+      // Redirect to login page or any other page after successful sign-up
+    } catch (error) {
+      const errorMessage = error.response.data.error.explanation;
+      alert(errorMessage);
+      console.log(error);
+    }
 
-    // // Send a POST request to your backend API
-    // fetch("/api/signup", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: json.stringify(userData),
-    // })
-    //   .then((response) => {
-    //     if (response.ok) {
-    //       // Resgistration was successful, redirect to the login page
-    //       navigate("/");
-    //     } else {
-    //       alert("Error signing up");
-    //       console.log("Registration failed");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log("Error: ", error);
-    //   });
-
-    console.log("Sign up:", formData);
-    // Redirect to login page or any other page after successful sign-up
-    navigate("/");
+    // console.log("Sign up:", formData);
+    // // Redirect to login page or any other page after successful sign-up
+    // navigate("/");
   };
 
   //   useEffect(() => {
@@ -116,7 +106,7 @@ function SignUpPage() {
             required
           />
         </div>
-        <div className="mb-4">
+        {/* <div className="mb-4">
           <label
             htmlFor="confirmPassword"
             className="block text-slate-100 font-medium"
@@ -132,7 +122,7 @@ function SignUpPage() {
             className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
             required
           />
-        </div>
+        </div> */}
         <div className="mb-4">
           {/* Add more input fields for additional sign-up information */}
         </div>

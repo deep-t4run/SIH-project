@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ParticleAnimation from "./ParticleAnimation";
 import axios from "axios";
 
 function HealthForm() {
+  const location = useLocation();
+  const userid = location.state && location.state.userid;
   const [formData, setFormData] = useState({
+    userid: userid,
     age: "",
     gender: "",
     country: "",
@@ -39,21 +42,21 @@ function HealthForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Form submitted:", formData);
-    navigate("/emotion-analysis");
-    // try {
-    //   const response = await axios.post(
-    //     "http://localhost:3001/api/v1/response/predict",
-    //     formData
-    //   );
-    //   if (response.data.success) {
-    //     navigate("/emotion-analysis", {
-    //       state: { prediction: response.data.data.predicted },
-    //     });
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    // console.log("Form submitted:", formData);
+    // navigate("/emotion-analysis");
+    try {
+      const response = await axios.post(
+        "http://localhost:3001/api/v1/response/predict",
+        formData
+      );
+      if (response.data.success) {
+        navigate("/emotion-analysis", {
+          state: { prediction: response.data.data.predicted },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
